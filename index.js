@@ -89,7 +89,7 @@ function draw() {
       lives--;
       if (!lives) {
         showAlert("GAME OVER");
-        document.location.reload();
+        // document.location.reload();
       } else {
         x = canvas.width / 2;
         y = canvas.height - 30;
