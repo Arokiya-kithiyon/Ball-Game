@@ -146,13 +146,18 @@ function mouseMoveHandler(e) {
   }
 }
 
-// 📱 Touch Start - Simulate Left/Right Key Press
+// 📱 Touch Start - Store Initial Touch
 function touchStartHandler(e) {
-  let touchX = e.touches[0].clientX;
-  if (touchX < window.innerWidth / 2) {
-    leftPressed = true;
-  } else {
-    rightPressed = true;
+  e.preventDefault(); // Prevent unwanted scrolling on mobile
+}
+
+// 📱 Touch Move - Move Paddle Continuously
+function touchMoveHandler(e) {
+  e.preventDefault(); // Prevent screen scrolling
+  let touchX = e.touches[0].clientX - canvas.offsetLeft;
+
+  if (touchX > 0 && touchX < canvas.width) {
+    paddleX = touchX - paddleWidth / 2;
   }
 }
 
@@ -160,14 +165,6 @@ function touchStartHandler(e) {
 function touchEndHandler(e) {
   leftPressed = false;
   rightPressed = false;
-}
-
-// 📱 Touch Move - Move Paddle Like Mouse
-function touchMoveHandler(e) {
-  let touchX = e.touches[0].clientX - canvas.offsetLeft;
-  if (touchX > 0 && touchX < canvas.width) {
-    paddleX = touchX - paddleWidth / 2;
-  }
 }
 
 function collisionDetection() {
